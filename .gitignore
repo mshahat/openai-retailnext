@@ -1,0 +1,7 @@
+# env with keys and additional config
+.env
+
+# data sampels from
+*.jpg
+
+.idea
