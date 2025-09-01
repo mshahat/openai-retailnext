@@ -2,3 +2,6 @@
 
 extracting code of an openai cookbook and updating the code base to use gpt 5 instead of gpt 4o
 
+```
+pyenv virtualenv 3 openai_pyenv
+```
