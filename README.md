@@ -2,6 +2,12 @@
 
 extracting code of an openai cookbook and updating the code base to use gpt 5 instead of gpt 4o
 
+## Sample Data
+download sample data from 
+[sample clothes sample data for openai cookbook](https://github.com/openai/openai-cookbook/tree/main/examples/data/sample_clothes)
+
+## Python environment
+
 ```
 pyenv virtualenv 3 openai_pyenv
 ```
