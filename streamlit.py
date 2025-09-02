@@ -10,12 +10,14 @@ import ast
 from main import generate_embeddings
 
 def init_data():
+
+    # MOHAMED - Read Catalog of Clothes items
     styles_filepath = "data/sample_clothes/sample_styles.csv"
     styles_df = pd.read_csv(styles_filepath, on_bad_lines='skip')
     print(styles_df.head())
     print("Opened dataset successfully. Dataset has {} items of clothing.".format(len(styles_df)))
 
-    # MOHAMED - Not Generating own embeddings for demo
+    # MOHAMED - Not Generating own embeddings for demo, commented the following
     # generate_embeddings(styles_df, 'productDisplayName')
     # print("Writing embeddings to file ...")
     # styles_df.to_csv('data/sample_clothes/sample_styles_with_embeddings.csv', index=False)
