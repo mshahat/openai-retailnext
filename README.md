@@ -9,5 +9,13 @@ download sample data from
 ## Python environment
 
 ```
-pyenv virtualenv 3 openai_pyenv
+pyenv install 3.13.3
+pyenv virtualenv 3.13.3 openai_pyenv
+pip install -r requirements.txt
+```
+
+## Run the app
+
+```
+streamlit run streamlit.py
 ```

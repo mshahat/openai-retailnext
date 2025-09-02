@@ -1,0 +1,10 @@
+openai
+tenacity
+tqdm
+numpy
+typing
+tiktoken
+pandas
+streamlit
+ipython
+python-dotenv
