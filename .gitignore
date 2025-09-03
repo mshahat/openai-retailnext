@@ -1,4 +1,5 @@
 # env with keys and additional config
+**/.env
 .env
 
 # data sampels from
@@ -7,5 +8,6 @@
 .idea
 **/.DS_Store
 
+**/sample_styles_with_embeddings.csv
 
 __pycache__/
