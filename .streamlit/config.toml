@@ -1,9 +1,14 @@
+[server]
+# Run in headless mode for servers/containers
+headless = true
+
 [theme]
 # Core palette
 primaryColor = "#000000"      # Black
 backgroundColor = "#F5F3EF"   # Off-White
 secondaryBackgroundColor = "#FFFFFF"
-textColor = "#000000"         # Black
+# textColor = "#000000"         # Black
+textColor = "#636363"          # Grey
 font = "sans serif"           # Will use Inter
 
 # Extended tokens (not officially supported by Streamlit but useful for docs)
@@ -31,3 +36,9 @@ spacing_xl = "40px"
 typography_display = "Playfair Display, serif"
 typography_body = "Inter, sans-serif"
 
+[client]
+showSidebarNavigation = true
+
+[logger]
+level = "info"                     # "error" | "warning" | "info" | "debug"
+messageFormat = "%(asctime)s %(levelname)s %(message)s"
