@@ -7,7 +7,7 @@ import streamlit as st
 import pandas as pd
 import ast
 
-from main import generate_embeddings
+#from main import generate_embeddings
 
 def init_data():
 
@@ -19,9 +19,9 @@ def init_data():
 
     # MOHAMED - Not Generating own embeddings for demo, commented the following
     # generate_embeddings(styles_df, 'productDisplayName')
-    # print("Writing embeddings to file ...")
+    # print ("Writing embeddings to file ...")
     # styles_df.to_csv('data/sample_clothes/sample_styles_with_embeddings.csv', index=False)
-    # print("Embeddings successfully stored in sample_styles_with_embeddings.csv")
+    # print ("Embeddings successfully stored in sample_styles_with_embeddings.csv")
 
     # MOHAMED - Use already generated embeddings for demo
     styles_df = pd.read_csv('data/sample_clothes/sample_styles_with_embeddings.csv', on_bad_lines='skip')
