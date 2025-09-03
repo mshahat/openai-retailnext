@@ -32,15 +32,6 @@ EMBEDDING_MODEL = "text-embedding-3-large"
 EMBEDDING_COST_PER_1K_TOKENS = 0.00013
 
 
-# MOHAMED - moved to streamlit.py
-# Creating the Embeddings
-
-# styles_filepath = "data/sample_clothes/sample_styles.csv"
-# styles_df = pd.read_csv(styles_filepath, on_bad_lines='skip')
-# print(styles_df.head())
-# print("Opened dataset successfully. Dataset has {} items of clothing.".format(len(styles_df)))
-
-
 # Batch Embedding Logic
 
 # Simple function to take in a list of text objects and return them as a list of embeddings
@@ -53,7 +44,7 @@ def get_embeddings(input: List):
     return [data.embedding for data in response]
 
 
-# Splits an iterable into batches of size n.
+# Splits an "iterable" into batches of size n.
 def batchify(iterable, n=1):
     l = len(iterable)
     for ndx in range(0, l, n):
@@ -112,14 +103,26 @@ def generate_embeddings(df, column_name):
 
 
 # MOHAMED - moved to streamlit.py
+# Creating the Embeddings
+
+styles_filepath = "data/sample_clothes/sample_styles.csv"
+styles_df = pd.read_csv(styles_filepath, on_bad_lines='skip')
+print(styles_df.head())
+print("Opened dataset successfully. Dataset has {} items of clothing.".format(len(styles_df)))
+
+# MOHAMED - moved to streamlit.py and not needed for Demo
 # generate_embeddings(styles_df, 'productDisplayName')
-# print("Writing embeddings to file ...")
+# print ("Writing embeddings to file ...")
 # styles_df.to_csv('data/sample_clothes/sample_styles_with_embeddings.csv', index=False)
-# print("Embeddings successfully stored in sample_styles_with_embeddings.csv")
+# print ("Embeddings successfully stored in sample_styles_with_embeddings.csv")
 
-# print(styles_df.head())
-# print("Opened dataset successfully. Dataset has {} items of clothing along with their embeddings.".format(len(styles_df)))
+styles_df = pd.read_csv('data/sample_clothes/sample_styles_with_embeddings.csv', on_bad_lines='skip')
 
+# Convert the 'embeddings' column from string representations of lists to actual lists of floats
+styles_df['embeddings'] = styles_df['embeddings'].apply(lambda x: ast.literal_eval(x))
+
+print(styles_df.head())
+print("Opened dataset successfully. Dataset has {} items of clothing along with their embeddings.".format(len(styles_df)))
 
 def cosine_similarity_manual(vec1, vec2):
     """Calculate the cosine similarity between two vectors."""
@@ -141,7 +144,7 @@ def find_similar_items(input_embedding, embeddings, threshold=0.5, top_k=2):
     # Filter out any similarities below the threshold
     filtered_similarities = [(index, sim) for index, sim in similarities if sim >= threshold]
 
-    # Sort the filtered similarities by similarity score
+    # Sort the filtered similarities by similarity-score
     sorted_indices = sorted(filtered_similarities, key=lambda x: x[1], reverse=True)[:top_k]
 
     # Return the top-k most similar items
