@@ -29,7 +29,7 @@ load_dotenv()
 
 client = OpenAI()
 
-GPT_MODEL = "gpt-5-mini"
+GPT_MODEL = "gpt-5"
 EMBEDDING_MODEL = "text-embedding-3-large"
 EMBEDDING_COST_PER_1K_TOKENS = 0.00013
 
@@ -170,41 +170,38 @@ def find_matching_items_with_rag(df_items, item_descs):
 
     return similar_items
 
-
-
-
 def analyze_image(image_base64, subcategories):
-    response = client.chat.completions.create(model=GPT_MODEL, messages = [
-        {
+    prompt = f"""Given an image of an item of clothing, analyze the item and generate a JSON output with the following fields: "items", "category", and "gender".
+           Use your understanding of fashion trends, styles, and gender preferences to provide accurate and relevant suggestions for how to complete the outfit.
+           The items field should be a list of items that would go well with the item in the picture. Each item should represent a title of an item of clothing that contains the style, color, and gender of the item.
+           The category needs to be chosen between the types in this list: {subcategories}.
+           You have to choose between the genders in this list: [Men, Women, Boys, Girls, Unisex]
+           Do not include the description of the item in the picture. Do not include the ```json ``` tag in the output.
+
+           Example Input: An image representing a black leather jacket.
+
+           Example Output: {{"items": ["Fitted White Women's T-shirt", "White Canvas Sneakers", "Women's Black Skinny Jeans"], "category": "Jackets", "gender": "Women"}}
+           """
+
+    print("analyse image prompt " + prompt)
+
+    response = client.responses.create(
+        model=GPT_MODEL,
+        input=[{
             "role": "user",
             "content": [
-                {
-                    "type": "text",
-                    "text": f"""Given an image of an item of clothing, analyze the item and generate a JSON output with the following fields: "items", "category", and "gender".
-                           Use your understanding of fashion trends, styles, and gender preferences to provide accurate and relevant suggestions for how to complete the outfit.
-                           The items field should be a list of items that would go well with the item in the picture. Each item should represent a title of an item of clothing that contains the style, color, and gender of the item.
-                           The category needs to be chosen between the types in this list: {subcategories}.
-                           You have to choose between the genders in this list: [Men, Women, Boys, Girls, Unisex]
-                           Do not include the description of the item in the picture. Do not include the ```json ``` tag in the output.
-
-                           Example Input: An image representing a black leather jacket.
-
-                           Example Output: {{"items": ["Fitted White Women's T-shirt", "White Canvas Sneakers", "Women's Black Skinny Jeans"], "category": "Jackets", "gender": "Women"}}
-                           """,
-                },
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{image_base64}",
-                    },
-                }
+                {"type": "input_text", "text": prompt},
+                {"type": "input_image", "image_url": f"data:image/jpeg;base64,{image_base64}"},
             ],
-        }
-    ])
-    # Extract relevant features from the response
-    features = response.choices[0].message.content
-    return features
+        }],
+        max_output_tokens=1000,
+    )
 
+    print("RAW ANALYSE IMAGE RESPONSE START >>>", repr(response), "<<< END")
+
+    # Extract relevant features from the response
+    features = response.output[1].content[0].text
+    return features
 
 
 
@@ -234,7 +231,7 @@ def check_match(reference_image_base64, suggested_image_base64):
         max_output_tokens=1000,
     )
 
-    print("RAW CHECK MATCH RESPONSE START >>>", repr(response), "<<< END")
+    #print("RAW CHECK MATCH RESPONSE START >>>", repr(response), "<<< END")
 
     features = response.output[1].content[0].text
     return features
