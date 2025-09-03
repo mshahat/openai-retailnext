@@ -8,3 +8,4 @@ pandas
 streamlit
 ipython
 python-dotenv
+base64
