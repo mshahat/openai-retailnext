@@ -12,29 +12,29 @@ textColor = "#636363"          # Grey
 font = "sans serif"           # Will use Inter
 
 # Extended tokens (not officially supported by Streamlit but useful for docs)
-[retailnext]
-beige = "#D9CBB9"
-gray = "#A6A6A6"
-offwhite = "#F5F3EF"
-accent_green = "#0F766E"
-accent_bronze = "#B45309"
-
-radii_sm = "8px"
-radii_md = "16px"
-radii_lg = "24px"
-radii_xl = "32px"
-
-shadow_sm = "0 1px 2px rgba(0,0,0,0.06)"
-shadow_md = "0 8px 24px rgba(0,0,0,0.08)"
-
-spacing_xs = "4px"
-spacing_sm = "8px"
-spacing_md = "16px"
-spacing_lg = "24px"
-spacing_xl = "40px"
-
-typography_display = "Playfair Display, serif"
-typography_body = "Inter, sans-serif"
+#[retailnext]
+#beige = "#D9CBB9"
+#gray = "#A6A6A6"
+#offwhite = "#F5F3EF"
+#accent_green = "#0F766E"
+#accent_bronze = "#B45309"
+#
+#radii_sm = "8px"
+#radii_md = "16px"
+#radii_lg = "24px"
+#radii_xl = "32px"
+#
+#shadow_sm = "0 1px 2px rgba(0,0,0,0.06)"
+#shadow_md = "0 8px 24px rgba(0,0,0,0.08)"
+#
+#spacing_xs = "4px"
+#spacing_sm = "8px"
+#spacing_md = "16px"
+#spacing_lg = "24px"
+#spacing_xl = "40px"
+#
+#typography_display = "Playfair Display, serif"
+#typography_body = "Inter, sans-serif"
 
 [client]
 showSidebarNavigation = true
