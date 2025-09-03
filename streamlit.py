@@ -37,8 +37,10 @@ def get_embeddings():
     # MOHAMED - Read Catalog of Clothes items
     styles_filepath = "data/sample_clothes/sample_styles.csv"
     styles_df = pd.read_csv(styles_filepath, on_bad_lines='skip')
-    print(styles_df.head())
-    print("Opened dataset successfully. Dataset has {} items of clothing.".format(len(styles_df)))
+    # print(styles_df.head())
+    st.write(styles_df.head())
+    # print("Opened dataset successfully. Dataset has {} items of clothing.".format(len(styles_df)))
+    st.write("Opened dataset successfully. Dataset has {} items of clothing.".format(len(styles_df)))
 
     # MOHAMED - Not Generating own embeddings for demo, commented the following
     # generate_embeddings(styles_df, 'productDisplayName')
@@ -52,8 +54,11 @@ def get_embeddings():
     # Convert the 'embeddings' column from string representations of lists to actual lists of floats
     styles_df['embeddings'] = styles_df['embeddings'].apply(lambda x: ast.literal_eval(x))
 
-    print(styles_df.head())
-    print("Opened dataset successfully. Dataset has {} items of clothing along with their embeddings.".format(len(styles_df)))
+    # print(styles_df.head())
+    st.write(styles_df.head())
+    # print("Opened dataset successfully. Dataset has {} items of clothing along with their embeddings.".format(len(styles_df)))
+    st.write("Opened dataset successfully. Dataset has {} items of clothing along with their embeddings.".format(len(styles_df)))
+
 
     return styles_df
 
@@ -81,7 +86,9 @@ image_analysis = json.loads(analysis)
 
 # Display the image and the analysis results
 display(Image(filename=reference_image))
+st.image(reference_image, caption="Your item", use_container_width=False)
 print(image_analysis)
+st.write(image_analysis)
 
 # Extract the relevant features from the analysis
 item_descs = image_analysis['items']
@@ -92,6 +99,7 @@ item_gender = image_analysis['gender']
 filtered_items = styles_df.loc[styles_df['gender'].isin([item_gender, 'Unisex'])]
 filtered_items = filtered_items[filtered_items['articleType'] != item_category]
 print(str(len(filtered_items)) + " Remaining Items")
+st.write(str(len(filtered_items)) + " Remaining Items")
 
 # Find the most similar items based on the input item descriptions
 matching_items = backend.find_matching_items_with_rag(filtered_items, item_descs)
@@ -109,8 +117,11 @@ for i, item in enumerate(matching_items):
 
 # Print the matching item description as a reminder of what we are looking for
 print(item_descs)
+st.write(item_descs)
 # Display the image
-display(HTML(html))
+#display(HTML(html))
+st.image(paths, caption=[f"Item {i+1}" for i in range(len(paths))], use_container_width=False)
+#st.image(matching_items, caption=[f"Item {i+1}" for i in range(len(matching_items))], use_container_width=True)
 
 # Select the unique paths for the generated images
 paths = list(set(paths))
@@ -120,7 +131,7 @@ for path in paths:
     suggested_image = backend.encode_image_to_base64(path)
 
     raw = backend.check_match(encoded_image, suggested_image)
-    print("RAW RESPONSE START >>>", repr(raw[:3000]), "<<< END")
+    #print("RAW RESPONSE START >>>", repr(raw[:3000]), "<<< END")
 
     if raw:
         # Check if the items match
@@ -128,10 +139,11 @@ for path in paths:
 
         # Display the image and the analysis results
         if match["answer"] == 'yes':
-            display(Image(filename=path))
-            print("The items match!")
-            print(match["reason"])
+            #display(Image(filename=path))
+            st.image(path)
+            #print("The items match!")
+            st.write("The items match!")
+            #print(match["reason"])
+            st.write(match["reason"])
 
 # ------------------------
-
-
