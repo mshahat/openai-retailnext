@@ -230,9 +230,9 @@ with right:
         <div class="card">
           <strong>How it works</strong>
           <ul style="margin-top:.5rem;">
-            <li>We analyze your uploaded item to infer category and style.</li>
-            <li>We search a catalog for items that pair well with it.</li>
-            <li>Optionally, we verify AI pairing compatibility.</li>
+            <li>Upload your hero piece — we instantly decode its category and style cues.</li>
+            <li>Discover curated complements from our eShop catalog, selected to elevate your look.</li>
+            <li>Optional: AI verifies each pairing for fit, color harmony, and overall vibe.</li>
           </ul>
         </div>
         """,
