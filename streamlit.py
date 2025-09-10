@@ -298,6 +298,12 @@ if uploaded:
         st.warning("Incomplete analysis received. Try a clearer image.")
         st.stop()
 
+    # Add a pause: only proceed when user clicks the button
+    proceed = st.button("Find Matching Items", type="primary")
+    if not proceed:
+        st.info("Click 'Find Matching Items' to continue.")
+        st.stop()
+
     # Filter catalog by gender/unisex and different category
     filtered_items = styles_df.loc[styles_df['gender'].isin([item_gender, 'Unisex'])]
     filtered_items = filtered_items[filtered_items['articleType'] != item_category]
